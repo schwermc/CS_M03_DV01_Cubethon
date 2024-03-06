@@ -4,7 +4,14 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public float restartDelay = 1f;
+    public GameObject completeLevelUI;
+
     private bool gameHasEnded = false;
+
+    public void CompleteLevel()
+    {
+        completeLevelUI.SetActive(true);
+    }
 
     public void EndGame()
     {
