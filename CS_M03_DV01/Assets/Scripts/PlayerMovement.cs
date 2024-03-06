@@ -55,8 +55,12 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.55f))
         {
-            Debug.Log(hit.collider.name);
-            return true;
+            if (hit.collider.name == "Ground")
+            {
+                //Debug.Log(hit.collider.name);
+                return true;
+            }
+            return false;
         }
         else
         {
