@@ -6,11 +6,23 @@ public class PlayerMovement : MonoBehaviour
     public float forwardForce = 2000f;
     public float sidewaysForce = 500f;
 
+    public float jumpVelocity = 5f;
+    public float distanceToGround = 0.1f;
+
     private GameManager gameManager;
+    private bool doJump = false;
 
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    void Update()
+    {
+        if (isGrounded() && Input.GetKeyDown(KeyCode.Space))
+        {
+            doJump = true;
+        }
     }
 
     void FixedUpdate()
@@ -30,6 +42,25 @@ public class PlayerMovement : MonoBehaviour
         if (rb.position.y < -2f)
         {
             gameManager.EndGame();
+        }
+
+        if (doJump)
+        {
+            rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
+            doJump = false;
+        }
+    }
+    bool isGrounded()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.55f))
+        {
+            Debug.Log(hit.collider.name);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
