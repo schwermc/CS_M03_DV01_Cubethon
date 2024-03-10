@@ -8,6 +8,14 @@ public class GameManager : MonoBehaviour
 
     private bool gameHasEnded = false;
 
+    private void Start()
+    {
+        if (SleaseMode.mode)
+        {
+            SleaseMode.truenOffCollider();
+        }
+    }
+
     public void CompleteLevel()
     {
         completeLevelUI.SetActive(true);
